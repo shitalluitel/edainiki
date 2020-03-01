@@ -1,0 +1,7 @@
+from django.db import models
+
+# Create your models here.
+
+
+class {{ camel_case_app_name }}(models.Model):
+    pass

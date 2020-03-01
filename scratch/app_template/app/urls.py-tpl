@@ -1,0 +1,15 @@
+from django.urls import path
+
+from apps.{{ app_name }}.app.views import ({{ camel_case_app_name }}ListView, {{ camel_case_app_name }}CreateView,
+                                            {{ camel_case_app_name }}EditView, {{ camel_case_app_name }}DetailView, {{ camel_case_app_name }}DeleteView
+                                            )
+
+app_name = '{{ app_name }}'
+
+urlpatterns = [
+    path('', {{ camel_case_app_name }}ListView.as_view(), name="list"),
+    path('create', {{ camel_case_app_name }}CreateView.as_view(), name="create"),
+    path('update', {{ camel_case_app_name }}EditView.as_view(), name="update"),
+    path('detail', {{ camel_case_app_name }}DetailView.as_view(), name="detail"),
+    path('delete', {{ camel_case_app_name }}DeleteView.as_view(), name="delete")
+]
