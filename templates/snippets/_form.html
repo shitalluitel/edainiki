@@ -1,0 +1,43 @@
+{% load widget_tweaks %}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel">
+            <div class="panel-body">
+                <form method="post" {% if enctype %} enctype="{{ enctype }}" {% endif %}>
+                    {% csrf_token %}
+                    {% if form.non_field_errors %}
+                        <div class="text-danger">
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+                    {% for field in form %}
+                        <div class="form-group {% if field.errors %} has-error {% endif %}">
+                            {% if field|field_type == 'imagefield' %}
+                                <label class="control-label">{{ field.label }}</label>
+                                <br>
+                                <div>
+                                    <emp>Previous:</emp>
+                                    <a href="{{ object.photo_url }}" target="_blank">{{ object.photo.name }}</a>
+                                </div>
+                                <br>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <span id="helpBlock2" class="help-block">{{ field.errors }}</span>
+                                {% endif %}
+                            {% else %}
+                                <label class="control-label">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <span id="helpBlock2" class="help-block">{{ field.errors }}</span>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

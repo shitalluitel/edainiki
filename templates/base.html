@@ -1,0 +1,65 @@
+{% extends 'adminlte/base.html' %}
+{% load static %}
+{#{% load notifications_tags %}#}
+
+{% block title %}Library Management System{% endblock %}
+
+{% block messages %}
+    {% include 'snippets/_messages.html' %}
+{% endblock %}
+
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+
+    {% block extra_stylesheets %}
+
+    {% endblock %}
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block content_header %}
+    <div class="container-fluid">
+        <section class="content-header"
+                 style="margin-bottom: 5px;padding-bottom: 15px; border-bottom: 1px solid #bcbcbc;">
+            <h1>
+                {% block page_name %}{% endblock %}
+                <small>{% block page_description %}{% endblock %}</small>
+            </h1>
+            {% block breadcrumbs %}
+                {#                <nav aria-label="breadcrumb">#}
+                <ol class="breadcrumb ">
+                    <li class="breadcrumb-item ml-1"><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+                    {% block breadcrumbLink %}
+                    {% endblock %}
+                </ol>
+                {#                </nav>#}
+            {% endblock %}
+        </section>
+    </div>
+{% endblock %}
+
+{% block nav_header %}
+    {% include 'main_pages/_main_header.html' %}
+{% endblock %}
+
+{% block nav_sidebar %}
+    {% include 'main_pages/_main_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+    {% block body_content %}
+
+    {% endblock %}
+{% endblock %}
+
+{% block extra_foot %}
+    {% block  extra_script %}
+    {% endblock %}
+
+{% endblock %}
+
+{% block nav_footer %}
+    {% include 'main_pages/_main_footer.html' %}
+{% endblock %}

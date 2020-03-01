@@ -1,0 +1,72 @@
+<li class="treeview">
+    <a href="#">
+        <i class="fa fa-book"></i>
+        <span>Setting</span>
+        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+    </a>
+    <ul class="treeview-menu">
+        <li class="treeview">
+            <a href="{% url 'setting' %}"><i class="fa fa-circle-o"></i> Setting </a>
+        </li>
+    </ul>
+
+    {#    For multi level form #}
+
+    <ul class="treeview-menu">
+        <li class="treeview">
+            <a href="#"><i class="fa fa-circle-o"></i> Batch
+                <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{% url 'batch:create' %}"><i class="fa fa-circle-o"></i>Create</a></li>
+                <li><a href="{% url 'batch:list' %}"><i class="fa fa-circle-o"></i> List</a></li>
+            </ul>
+        </li>
+    </ul>
+    <ul class="treeview-menu">
+        <li class="treeview">
+            <a href="#"><i class="fa fa-circle-o"></i> Course
+                <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{% url 'course:create' %}"><i class="fa fa-circle-o"></i>Create</a></li>
+                <li><a href="{% url 'course:list' %}"><i class="fa fa-circle-o"></i> List</a></li>
+            </ul>
+        </li>
+    </ul>
+</li>
+
+<li class="treeview">
+    <a href="#">
+        <i class="fa fa-book"></i>
+        <span>Student</span>
+        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+    </a>
+    <ul class="treeview-menu">
+        <li><a href="{% url 'student:choose-course-batch' action='create'%}"><i class="fa fa-circle-o"></i>Create</a></li>
+        <li><a href="{% url 'student:choose-course-batch' action='list'%}"><i class="fa fa-circle-o"></i> List</a></li>
+    </ul>
+</li>
+
+
+<li class="treeview">
+    <a href="#">
+        <i class="fa fa-book"></i>
+        <span>Book</span>
+        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+    </a>
+    <ul class="treeview-menu">
+        <li><a href="{% url 'book:create' %}"><i class="fa fa-circle-o"></i>Create</a></li>
+        <li><a href="{% url 'book:list' %}"><i class="fa fa-circle-o"></i> List</a></li>
+    </ul>
+</li>

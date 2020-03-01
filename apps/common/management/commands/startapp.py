@@ -11,7 +11,7 @@ TEMPLATE_BASE_DIR = 'scratch/app_template'
 
 class Command(TemplateCommand):
     help = (
-        f"Creates new app on the location {APPS_DIR}."
+        f"Creates new controller on the location {APPS_DIR}."
     )
     missing_args_message = "You must provide an App name."
 
@@ -23,14 +23,14 @@ class Command(TemplateCommand):
         target = os.path.join(APPS_DIR, app_name.lower())
         if not os.path.exists(target):
             os.mkdir(target)
-        print(f"Creating app with name {app_name} ...")
+        print(f"Creating controller with name {app_name} ...")
         options.update({
             'template': TEMPLATE_BASE_DIR
         })
 
-        super(Command, self).handle('app', app_name, target, **options)
-        print("Successfully crated app.")
-        print(f"Target for new app in 'apps.{app_name}'")
+        super(Command, self).handle('controller', app_name, target, **options)
+        print("Successfully crated controller.")
+        print(f"Target for new controller in 'apps.{app_name}'")
 
         print("** Copying html template files **")
 
@@ -44,5 +44,7 @@ class Command(TemplateCommand):
             file_path = os.path.join(html_templates_dir, file)
             if os.path.isfile(file_path):
                 shutil.copy(file_path, os.path.join(html_templates_dir, f'{app_name}'))
+                if os.path.exists(file_path):
+                    os.remove(file_path)
 
         print("** Copying html template files completed successfully **")

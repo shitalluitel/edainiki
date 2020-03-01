@@ -1,0 +1,4 @@
+<option value="">{{ empty_label }}</option>
+{% for datum in data %}
+    <option value="{{ datum.id }}">{{ datum.name }}</option>
+{% endfor %}

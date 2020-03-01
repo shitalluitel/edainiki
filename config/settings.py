@@ -49,7 +49,8 @@ SYS_APPS = [
 THIRD_PARTY_APP = []
 
 NEW_APPS = [
-    'apps.common'
+    'apps.common',
+    # 'apps.settings',
 ]
 
 INSTALLED_APPS = SYS_APPS + THIRD_PARTY_APP + NEW_APPS
@@ -69,7 +70,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(PROJECT_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
