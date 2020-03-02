@@ -1,16 +1,17 @@
 from django.shortcuts import render, redirect, reverse
+from django.urls import reverse_lazy
 
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
 
 from apps.{{ app_name }}.models import {{ camel_case_app_name }}
-from apps.{{ app_name }}.app.forms import ({{ camel_case_app_name }}CreateForm, {{ camel_case_app_name }}UpdateForm)
+from apps.{{ app_name }}.controller.forms import ({{ camel_case_app_name }}CreateForm, {{ camel_case_app_name }}UpdateForm)
 
 
 class {{ camel_case_app_name }}CreateView(CreateView):
     queryset = {{ camel_case_app_name }}.objects.all()
     form_class = {{ camel_case_app_name }}CreateForm
     template_name = '{{ app_name }}/create.html'
-    success_url = '{{ app_name }}:list'
+    success_url = reverse_lazy('{{ app_name }}:list')
 
 
 class {{ camel_case_app_name }}ListView(ListView):
@@ -22,16 +23,16 @@ class {{ camel_case_app_name }}EditView(UpdateView):
     queryset = {{ camel_case_app_name }}.objects.all()
     form_class = {{ camel_case_app_name }}UpdateForm
     template_name = '{{ app_name }}/create.html'
-    success_url = '{{ app_name }}:list'
+    success_url = reverse_lazy('{{ app_name }}:list')
 
 
 class {{ camel_case_app_name }}DetailView(DetailView):
     queryset = {{ camel_case_app_name }}.objects.all()
-    template_name = '{{ app_name }}/list.html'
+    template_name = '{{ app_name }}/detail.html'
 
 
 class {{ camel_case_app_name }}DeleteView(DeleteView):
     queryset = {{ camel_case_app_name }}.objects.all()
     template_name = '{{ app_name }}/create.html'
-    success_url = '{{ app_name }}:list'
+    success_url = reverse_lazy('{{ app_name }}:list')
 

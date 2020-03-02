@@ -28,7 +28,7 @@ class Command(TemplateCommand):
             'template': TEMPLATE_BASE_DIR
         })
 
-        super(Command, self).handle('controller', app_name, target, **options)
+        super(Command, self).handle('app', app_name, target, **options)
         print("Successfully crated controller.")
         print(f"Target for new controller in 'apps.{app_name}'")
 
