@@ -1,6 +1,7 @@
 from ckeditor.widgets import CKEditorWidget
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from django import forms
+from django_summernote.widgets import SummernoteWidget
 
 from apps.student.models import Student, StudentLetter
 
@@ -35,8 +36,13 @@ class StudentUpdateForm(forms.ModelForm):
 
 
 class StudentLetterForm(forms.ModelForm):
-    template = forms.CharField(widget=CKEditorUploadingWidget())
+    template = forms.CharField(widget=SummernoteWidget())
 
     class Meta:
         model = StudentLetter
         fields = 'template',
+
+        # widgets = {
+        #     'template': SummernoteWidget(),
+        #     # 'bar': SummernoteInplaceWidget(),
+        # }

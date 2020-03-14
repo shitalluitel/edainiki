@@ -1,0 +1,10 @@
+
+.table-template-bordered {
+    border: 1px solid black;
+}
+
+.table-template-bordered > thead > tr > th, .table-template-bordered > tbody > tr > th,
+.table-template-bordered > tfoot > tr > th, .table-template-bordered > thead > tr > td,
+.table-template-bordered > tbody > tr > td, .table-template-bordered > tfoot > tr > t {
+    border: 1px solid black;
+}

@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include, re_path
+from django.urls import path, include
 
 from apps.common.views import HomePageView
 
@@ -11,6 +11,7 @@ urlpatterns = [
                   path('student/', include('apps.student.controller.urls', namespace='students')),
                   path('', HomePageView.as_view(), name="home"),
                   path('ckeditor/', include('ckeditor_uploader.urls')),
+                  path('summernote/', include('django_summernote.urls')),
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

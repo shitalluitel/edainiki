@@ -1,8 +1,9 @@
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView, FormView
+from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
 
 from apps.student.controller.forms import (StudentCreateForm, StudentUpdateForm, StudentLetterForm)
 from apps.student.models import Student, StudentLetter
+from apps.student.utils import generate_letter
 
 
 class StudentCreateView(CreateView):
@@ -40,6 +41,21 @@ class StudentLetterView(CreateView):
     form_class = StudentLetterForm
     template_name = 'student/letter.html'
 
+    def get_context_data(self, **kwargs):
+        # kwargs['placeholders'] = {
+        #     x.attname: '{{ _ }}'.replace('_', x.attname) for x in Student._meta.fields if
+        #     x not in ['id', 'created_at', 'modified_at']
+        # }
+        #
+        kwargs['placeholders'] = list(
+            map(
+                lambda x: '{{ _ }}'.replace('_', x.attname),
+                Student._meta.fields
+            )
+        )
+
+        return super().get_context_data(**kwargs)
+
 
 class StudentLetterUpdateView(UpdateView):
     success_url = reverse_lazy('student:list')
@@ -51,3 +67,18 @@ class StudentLetterUpdateView(UpdateView):
 class StudentLetterDetailView(DetailView):
     template_name = 'student/letter_detail.html'
     queryset = StudentLetter.objects.all()
+
+    def get_context_data(self, **kwargs):
+        student = Student.objects.filter(
+            id=self.kwargs.get('student_id')
+        ).first()
+
+        letter = StudentLetter.objects.filter(id=self.kwargs.get('pk')).first()
+        kwargs['template'] = generate_letter(
+            instance=student,
+            letter_template=letter.template
+        )
+        return super().get_context_data(**kwargs)
+
+
+

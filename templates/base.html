@@ -10,13 +10,10 @@
 
 
 {% block extra_head %}
-    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
-
+    <link rel="stylesheet" href="{%  static 'bower_components/jquery-ui/themes/base/jquery-ui.min.css' %}">
+    <link rel="stylesheet" href="{%  static 'css/style.css' %}">
     {% block extra_stylesheets %}
-
     {% endblock %}
-
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 {% endblock %}
 
 {% block content_header %}
@@ -50,11 +47,11 @@
 
 {% block content %}
     {% block body_content %}
-
     {% endblock %}
 {% endblock %}
 
 {% block extra_foot %}
+    <script src="{% static '/bower_components/jquery-ui/jquery-ui.min.js' %}"></script>
     {% block  extra_script %}
     {% endblock %}
 
