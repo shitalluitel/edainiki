@@ -7,6 +7,7 @@
             <div class="col-md-9">
                 <form method="post">
                     {% csrf_token %}
+                    {{ form.type }}
                     {{ form.model }}
                     {{ form.template | safe}}
                     <input type="submit" value="Submit">
@@ -45,25 +46,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
-
-
-{% block extra_script %}
-    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
-    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
-    <script>
-        function allowDrop(ev) {
-            ev.preventDefault();
-        }
-
-        function drag(ev) {
-            ev.dataTransfer.setData("text", ev.target.id);
-        }
-
-        function drop(ev) {
-            ev.preventDefault();
-            var data = ev.dataTransfer.getData("text");
-            ev.target.appendChild(document.getElementById(data));
-        }
-    </script>
 {% endblock %}

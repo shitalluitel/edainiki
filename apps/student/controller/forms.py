@@ -33,16 +33,3 @@ class StudentUpdateForm(forms.ModelForm):
             field.widget.attrs.update({
                 'class': 'form-control',
             })
-
-
-class StudentLetterForm(forms.ModelForm):
-    template = forms.CharField(widget=SummernoteWidget())
-
-    class Meta:
-        model = StudentLetter
-        fields = 'template',
-
-        # widgets = {
-        #     'template': SummernoteWidget(),
-        #     # 'bar': SummernoteInplaceWidget(),
-        # }

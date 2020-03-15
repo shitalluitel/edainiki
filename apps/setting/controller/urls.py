@@ -1,7 +1,12 @@
 from django.urls import path
 
-from apps.setting.controller.views import (SettingListView, SettingCreateView,
-                                           SettingEditView, SettingDetailView, SettingDeleteView)
+from apps.setting.controller.views.setting import (
+    SettingListView, SettingCreateView,
+    SettingEditView, SettingDetailView, SettingDeleteView
+)
+from apps.setting.controller.views.template import (
+    LetterTemplateUpdateView,  TemplateRedirectView
+)
 
 app_name = 'setting'
 
@@ -10,5 +15,8 @@ urlpatterns = [
     path('create/', SettingCreateView.as_view(), name="create"),
     path('update/', SettingEditView.as_view(), name="update"),
     path('detail/', SettingDetailView.as_view(), name="detail"),
-    path('delete/', SettingDeleteView.as_view(), name="delete")
+    path('delete/', SettingDeleteView.as_view(), name="delete"),
+    path('template/<int:pk>', LetterTemplateUpdateView.as_view(), name="template-update"),
+    path('template/', TemplateRedirectView.as_view(), name="template-create"),
+    # path('letter/detail/<int:pk>/student/<int:student_id>', StudentLetterDetailView.as_view(), name="letter-detail"),
 ]

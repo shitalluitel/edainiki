@@ -49,15 +49,16 @@ THIRD_PARTY_APP = [
     'django_adminlte',
     'debug_toolbar',
     'widget_tweaks',
-    'ckeditor',
+    # 'ckeditor',
     'django_summernote',
-    # 'ckeditor_uploader',
+    'django_extensions'
 ]
 
 NEW_APPS = [
     'apps.common',
     'apps.setting',
     'apps.student',
+    'apps.charkilla',
 ]
 
 INSTALLED_APPS = SYS_APPS + THIRD_PARTY_APP + NEW_APPS
@@ -98,8 +99,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(PROJECT_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'edainiki',
+        'USER': 'luitel',
+        'PASSWORD': 'luitel@dell.com',
+        'HOST': 'localhost',
+        'POST': 5432
     }
 }
 
@@ -154,164 +159,90 @@ INTERNAL_IPS = [
     'localhost'
 ]
 
-CKEDITOR_JQUERY_URL = os.path.join(STATIC_URL, 'bower_components/jquery/dist/jquery.min.js')
-CKEDITOR_UPLOAD_PATH = "uploads/"
-
-CKEDITOR_CONFIGS = {
-    'default': {
-        'skin': 'bootstrapck',
-        'toolbar_CustomToolbarConfig': [
-            {
-                'name': 'document',
-                'items': [
-                    '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates', 'Cut', 'Copy', 'Paste',
-                    'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'
-                ]
-            },
-            {
-                'name': 'editing',
-                'items': ['Find', 'Replace', '-']
-            },
-            {
-                'name': 'basicstyles',
-                'items': ['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript']
-            },
-            {
-                'name': 'paragraph',
-                'items': [
-                    'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-',
-                    'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter',
-                    'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl',
-                    'Language'
-                ]
-            },
-            {
-                'name': 'links',
-                'items': ['Link', 'Unlink', 'Anchor']
-            },
-            {
-                'name': 'insert',
-                'items': ['Image', 'Table', 'HorizontalRule', 'SpecialChar', 'PageBreak']
-            },
-            '/',
-            {
-                'name': 'styles',
-                'items': ['Styles', 'Format', 'Font', 'FontSize']
-            },
-            {
-                'name': 'colors',
-                'items': ['TextColor']
-            },
-            {
-                'name': 'tools',
-                'items': ['Maximize']
-            },
-        ],
-        'toolbar': 'CustomToolbarConfig',  # put selected toolbar config here
-        'indent': False,
-        'width': '100%',
-    }
-}
-
-CKEDITOR_IMAGE_BACKEND = "pillow"
-CKEDITOR_UPLOAD_SLUGIFY_FILENAME = False
-CKEDITOR_BROWSE_SHOW_DIRS = True
-
+# CKEDITOR_JQUERY_URL = os.path.join(STATIC_URL, 'bower_components/jquery/dist/jquery.min.js')
+# CKEDITOR_UPLOAD_PATH = "uploads/"
+#
+# CKEDITOR_CONFIGS = {
+#     'default': {
+#         'skin': 'bootstrapck',
+#         'toolbar_CustomToolbarConfig': [
+#             {
+#                 'name': 'document',
+#                 'items': [
+#                     '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates', 'Cut', 'Copy', 'Paste',
+#                     'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'
+#                 ]
+#             },
+#             {
+#                 'name': 'editing',
+#                 'items': ['Find', 'Replace', '-']
+#             },
+#             {
+#                 'name': 'basicstyles',
+#                 'items': ['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript']
+#             },
+#             {
+#                 'name': 'paragraph',
+#                 'items': [
+#                     'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-',
+#                     'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter',
+#                     'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl',
+#                     'Language'
+#                 ]
+#             },
+#             {
+#                 'name': 'links',
+#                 'items': ['Link', 'Unlink', 'Anchor']
+#             },
+#             {
+#                 'name': 'insert',
+#                 'items': ['Image', 'Table', 'HorizontalRule', 'SpecialChar', 'PageBreak']
+#             },
+#             '/',
+#             {
+#                 'name': 'styles',
+#                 'items': ['Styles', 'Format', 'Font', 'FontSize']
+#             },
+#             {
+#                 'name': 'colors',
+#                 'items': ['TextColor']
+#             },
+#             {
+#                 'name': 'tools',
+#                 'items': ['Maximize']
+#             },
+#         ],
+#         'toolbar': 'CustomToolbarConfig',  # put selected toolbar config here
+#         'indent': False,
+#         'width': '100%',
+#     }
+# }
+#
+# CKEDITOR_IMAGE_BACKEND = "pillow"
+# CKEDITOR_UPLOAD_SLUGIFY_FILENAME = False
+# CKEDITOR_BROWSE_SHOW_DIRS = True
+#
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 SUMMERNOTE_THEME = 'bs3'
 
-# SUMMERNOTE_CONFIG = {
-#     # Using SummernoteWidget - iframe mode, default
-#     'iframe': True,
-#
-#     # Or, you can set it as False to use SummernoteInplaceWidget by default - no iframe mode
-#     # In this case, you have to load Bootstrap/jQuery stuff by manually.
-#     # Use this when you're already using Bootstraip/jQuery based themes.
-#     'iframe': False,
-#
-#     # You can put custom Summernote settings
-#     'summernote': {
-#         # As an example, using Summernote Air-mode
-#         'airMode': False,
-#
-#         # Change editor size
-#         'width': '100%',
-#         'height': '480',
-#
-#         # Use proper language setting automatically (default)
-#         'lang': None,
-#
-#         # Or, set editor language/locale forcely
-#         'lang': 'ko-KR',
-#
-#         # You can also add custom settings for external plugins
-#         'print': {
-#             'stylesheetUrl': '/some_static_folder/printable.css',
-#         },
-#         'codemirror': {
-#             'mode': 'htmlmixed',
-#             'lineNumbers': 'true',
-#             # You have to include theme file in 'css' or 'css_for_inplace' before using it.
-#             'theme': 'monokai',
-#         },
-#     },
-#
-#     # Need authentication while uploading attachments.
-#     'attachment_require_authentication': True,
-#
-#     # Set `upload_to` function for attachments.
-#     # 'attachment_upload_to': my_custom_upload_to_func(),
-#
-#     # Set custom storage class for attachments.
-#     'attachment_storage_class': 'my.custom.storage.class.name',
-#
-#     # Set custom model for attachments (default: 'django_summernote.Attachment')
-#     'attachment_model': 'my.custom.attachment.model', # must inherit 'django_summernote.AbstractAttachment'
-#
-#     # You can disable attachment feature.
-#     'disable_attachment': False,
-#
-#     # Set `True` to return attachment paths in absolute URIs.
-#     'attachment_absolute_uri': False,
-#
-#     # test_func in summernote upload view. (Allow upload images only when user passes the test)
-#     # https://docs.djangoproject.com/en/2.2/topics/auth/default/#django.contrib.auth.mixins.UserPassesTestMixin
-#     # ```
-#     # def example_test_func(request):
-#     #     return request.user.groups.filter(name='group_name').exists()
-#     # ```
-#     # 'test_func_upload_view': example_test_func,
-#
-#     # You can add custom css/js for SummernoteWidget.
-#     'css': (
-#     ),
-#     'js': (
-#     ),
-#
-#     # You can also add custom css/js for SummernoteInplaceWidget.
-#     # !!! Be sure to put {{ form.media }} in template before initiate summernote.
-#     'css_for_inplace': (
-#     ),
-#     'js_for_inplace': (
-#     ),
-#
-#     # Codemirror as codeview
-#     # If any codemirror settings are defined, it will include codemirror files automatically.
-#     'css': (
-#         '//cdnjs.cloudflare.com/ajax/libs/codemirror/5.29.0/theme/monokai.min.css',
-#     ),
-#
-#     # Lazy initialize
-#     # If you want to initialize summernote at the bottom of page, set this as True
-#     # and call `initSummernote()` on your page.
-#     'lazy': True,
-#
-#     # To use external plugins,
-#     # Include them within `css` and `js`.
-#     'js': {
-#         '/some_static_folder/summernote-ext-print.js',
-#         '//somewhere_in_internet/summernote-plugin-name.js',
-#     },
-# }
+SUMMERNOTE_CONFIG = {
+    # You can put custom Summernote settings
+    'summernote': {
+        # As an example, using Summernote Air-mode
+        'airMode': False,
+
+        # Change editor size
+        'width': '100%',
+        'height': '480',
+
+        'codemirror': {
+            'mode': 'htmlmixed',
+            'lineNumbers': 'true',
+            'theme': 'monokai',
+        },
+    },
+}
+
+SHELL_PLUS = 'ipython'

@@ -1,5 +1,9 @@
 from django import forms
-from apps.setting.models import Setting
+from django_summernote.widgets import SummernoteWidget
+
+from apps.setting.models import Setting, LetterTemplate
+
+
 # Create your form here.
 
 
@@ -14,3 +18,25 @@ class SettingUpdateForm(forms.ModelForm):
         model = Setting
         fields = "__all__"
 
+
+class LetterTemplateForm(forms.ModelForm):
+    template = forms.CharField(widget=SummernoteWidget())
+
+    class Meta:
+        model = LetterTemplate
+        fields = 'template',
+
+
+class TemplateRedirectForm(forms.ModelForm):
+    class Meta:
+        model = LetterTemplate
+        fields = 'model', 'type',
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.update(
+                {
+                    'class': 'form-control'
+                }
+            )

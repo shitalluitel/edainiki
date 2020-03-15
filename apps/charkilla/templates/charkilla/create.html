@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block page_name %}
+    <!--Add Some thing here. -->
+{% endblock %}
+
+{% block page_description %}
+    Create
+{% endblock %}
+
+{% block breadcrumbLink %}
+    <li>
+        <a href="#" class="breadcrumb-item"><!--Add Some thing here. --></a>
+    </li>
+    <li>
+        <a href="#" class="breadcrumb-item active"><!--Add Some thing here. --></a>
+    </li>
+{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-body">
+                    <form method="post" {% if enctype %} enctype="{{ enctype }}" {% endif %}>
+                        {% csrf_token %}
+                        {% if form.non_field_errors %}
+                            <div class="text-danger">
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+                        {% for field in form %}
+                            <div class="form-group {% if field.errors %} has-error {% endif %}">
+                                {% if field|field_type == 'imagefield' %}
+                                    <label class="control-label">{{ field.label }}</label>
+                                    <br>
+                                    <div>
+                                        <emp>Previous:</emp>
+                                        <a href="{{ object.photo_url }}" target="_blank">{{ object.photo.name }}</a>
+                                    </div>
+                                    <br>
+                                    {{ field }}
+                                    {% if field.errors %}
+                                        <span id="helpBlock2" class="help-block">{{ field.errors }}</span>
+                                    {% endif %}
+                                {% else %}
+                                    <label class="control-label">{{ field.label }}</label>
+                                    {{ field }}
+                                    {% if field.errors %}
+                                        <span id="helpBlock2" class="help-block">{{ field.errors }}</span>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+
+                        <table class="table form-table table-bordered table-sm">
+                            <thead class="text-center">
+                            <tr>
+                                <td rowspan="2" style="width: 5%;">साबिक गा बि स / न पा</td>
+                                <td rowspan="2">हाल गा बि स / न पा</td>
+                                <td colspan="3">जग्गाको विवरण</td>
+{#                                <td rowspan="2">बाटो</td>#}
+{#                                <td rowspan="2">बाटोको प्रकार</td>#}
+                                <td colspan="4"> चार किल्ला</td>
+                                <td rowspan="2">कैफियत</td>
+                                <td rowspan="2"></td>
+                            </tr>
+                            <tr>
+                                <td>नक्सा सिट नं</td>
+                                <td>कि.नं</td>
+                                <td>
+                                    क्षेत्रफल <br>
+                                    बिग्घा - कट्ठा - धुर
+                                </td>
+                                <td>पुर्ब</td>
+                                <td>पश्चिम</td>
+                                <td>उत्तर</td>
+                                <td>दक्षिण</td>
+                            </tr>
+{#                            <tr>#}
+{#                                <td>बिग्घा</td>#}
+{#                                <td>कट्ठा</td>#}
+{#                                <td>धुर</td>#}
+{#                            </tr>#}
+                            </thead>
+                            <tbody>
+                            {% for fourpiller in formset %}
+                                <tr class="item">
+                                    <td>
+{#                                        {{ fourpiller.old_new_address }}#}
+                                    </td>
+                                    <td>
+                                        <input type="text" id="new-place" disabled
+                                               class="form-control new-name formset-field">
+                                    </td>
+                                    <td>
+                                        {{ fourpiller.map_sheet_no }}
+                                    </td>
+                                    <td>
+                                        {{ fourpiller.kitta_no }}
+                                    </td>
+                                    <td>
+                                        {{ fourpiller.total_area }}
+                                    </td>
+{#                                    <td>#}
+{#                                        {{ fourpiller.road | add_class:"formset-field road-checkbox" }}#}
+{#                                    </td>#}
+{#                                    <td>#}
+{#                                        {{ fourpiller.road_type | add_class:"road-type" }}#}
+{#                                    </td>#}
+                                    <td>
+                                        {{ fourpiller.east_piller }}
+                                    </td>
+                                    <td>
+                                        {{ fourpiller.west_piller }}
+                                    </td>
+                                    <td>
+                                        {{ fourpiller.north_piller }}
+                                    </td>
+                                    <td>
+                                        {{ fourpiller.south_piller }}
+                                    </td>
+
+                                    <td>
+                                        {{ fourpiller.description }}
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-sm remove-form-row"
+                                                id="{{ fourpiller.prefix }}">
+                                            {% if fourpiller.id %}
+                                                {{ fourpiller.id | add_class:"formset-field" }}
+                                            {% endif %}
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                <td colspan="11"
+                                    style="border-left: none!important; border-right: none !important; border-bottom: none!important;">
+                                    <button type="button" class="btn btn-sm btn-success add-form-row"
+                                            id="{{ formset.prefix }}">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        {{ formset.management_form }}
+
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

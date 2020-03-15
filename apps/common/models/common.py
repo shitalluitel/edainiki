@@ -1,3 +1,5 @@
+import uuid
+
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.core.validators import FileExtensionValidator
@@ -46,8 +48,25 @@ class SlugModel(models.Model):
 
 
 class DainikiModel(models.Model):
+    applicant_name = models.CharField(
+        max_length=150,
+        error_messages={'max_length': 'कृपया नामाको लम्बाई ६४ भन्दा कम राख्नुहोस।'}
+    )
+    eng_date = models.DateField(null=True)
+    nep_date = models.CharField(
+        max_length=10,
+        error_messages={'max_length': 'तपाईले छान्नु भएको मिति मिलेको छैन। कृपया सहि मिति छनोट गर्नुहोस्।'},
+        null=True
+    )
+    is_deleted = models.BooleanField(default=False)
+    is_approved = models.BooleanField(default=False)
+    form_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+
     class Meta:
         abstract = True
+
+    def __str__(self):
+        return self.applicant_name
 
 
 class DainikiDocumentModel(models.Model):

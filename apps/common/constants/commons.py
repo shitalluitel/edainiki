@@ -12,3 +12,10 @@ FILE_TYPES = (
     (OTHER, 'अन्य'),
 )
 
+CHARKILLA = 'Charkilla'
+STUDENT = 'Student'
+
+TEMPLATE_FOR = (
+    (CHARKILLA, CHARKILLA),
+    (STUDENT, STUDENT),
+)

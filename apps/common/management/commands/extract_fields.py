@@ -1,5 +1,4 @@
 import json
-import pickle
 
 from django.apps import apps
 from django.core.management import BaseCommand
@@ -43,7 +42,7 @@ class Command(BaseCommand):
             print(json.dumps(extracted_fields, indent=4, default=str))
             f = open("file.py", "w")
             for key, value in extracted_fields.items():
-                f.writelines(f'{key.upper().replace(" ", "_")}={value}')
+                f.writelines(f'{key.upper().replace(" ", "_")}={value} \n')
             f.close()
             return
         print(model)

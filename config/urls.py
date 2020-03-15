@@ -9,8 +9,8 @@ urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('setting/', include('apps.setting.controller.urls', namespace='settings')),
                   path('student/', include('apps.student.controller.urls', namespace='students')),
+                  path('charkilla/', include('apps.charkilla.controller.urls', namespace='charkillas')),
                   path('', HomePageView.as_view(), name="home"),
-                  path('ckeditor/', include('ckeditor_uploader.urls')),
                   path('summernote/', include('django_summernote.urls')),
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

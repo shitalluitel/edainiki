@@ -1,0 +1,7 @@
+NIBEDAN = 'Nibedan'
+SIFARIS = 'Sifaris'
+
+TEMPLATE_TYPE = (
+    (NIBEDAN, NIBEDAN),
+    (SIFARIS, SIFARIS),
+)
