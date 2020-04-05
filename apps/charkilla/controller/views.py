@@ -1,13 +1,15 @@
 from django.contrib import messages
+from django.http import HttpResponse
 from django.shortcuts import redirect
+from django.template import engines
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
 
 from apps.charkilla.controller.forms import (
     CharkillaCreateForm, CharkillaUpdateForm, CharkillaDetailFormSet)
 from apps.charkilla.models import Charkilla
-from apps.common.utils.template_util import generate_letter
-from apps.setting.models import LetterTemplate
+from apps.common.mixins import GenerateDetailPageFromTemplate
+from apps.common.utils.template_util import generate_form
 
 
 class CharkillaCreateView(CreateView):
@@ -15,14 +17,6 @@ class CharkillaCreateView(CreateView):
     form_class = CharkillaCreateForm
     template_name = 'charkilla/create.html'
     success_url = reverse_lazy('charkilla:list')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        if self.request.POST:
-            context['formset'] = CharkillaDetailFormSet(self.request.POST)
-        else:
-            context['formset'] = CharkillaDetailFormSet()
-        return context
 
     def form_valid(self, form):
         context = self.get_context_data()
@@ -37,14 +31,6 @@ class CharkillaCreateView(CreateView):
 
             return redirect('student:list')
         else:
-            # error_fields = set(
-            #     chain.from_iterable(
-            #         map(
-            #             lambda x: list(x.keys()),
-            #             formset.errors
-            #         )
-            #     )
-            # )
             messages.error(
                 self.request,
                 f'रेकर्ड सम्पादन गर्न सकिएन।'
@@ -79,23 +65,11 @@ class CharkillaDeleteView(DeleteView):
     success_url = reverse_lazy('charkilla:list')
 
 
-class CharkillaTemplateView(DetailView):
+class CharkillaTemplateView(DetailView, GenerateDetailPageFromTemplate):
     template_name = 'common/template.html'
     queryset = Charkilla.objects.all()
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        object = self.object
-        if object:
-            temp_obj = LetterTemplate.objects.filter(
-                model=object.__class__.__name__
-            ).first()
-            if temp_obj:
-                template = generate_letter(
-                    instance=object,
-                    letter_template=temp_obj.template
-                )
-            else:
-                template = '<h3> Doesn\'t have any template. </h3>'
-            context['template'] = template
-        return context
+    # from django.template import engines
+    #
+    # django_engine = engines['django']
+    # template = django_engine.from_string("Hello {{ name }}!")

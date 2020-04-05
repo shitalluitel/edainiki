@@ -21,9 +21,10 @@
                     <div class="box-body" style="display: none;">
                         <div class="direct-chat-messages" style="height: unset;">
                             {% for placeholder in non_related_fields %}
-                                <span class="label label-default" style="font-size: 100%; font-weight: normal; padding: unset">
+                                <button class="btn btn-sm btn-bitbucket add-template" value="{{ placeholder }}"
+                                        style="font-size: 100%; font-weight: normal; padding: unset; margin-bottom: 10px;">
                                     &nbsp;{{ placeholder }}&nbsp;
-                                </span>&nbsp; &nbsp;
+                                </button>&nbsp; &nbsp;
                             {% endfor %}
                         </div>
                     </div>
@@ -44,9 +45,10 @@
                     <div class="box-body" style="display: none;">
                         <div class="direct-chat-messages" style="height: unset;">
                             {% for placeholder in related_fields %}
-                                <span class="label label-default" style="font-size: 100%; font-weight: normal; padding: unset">
+                                <button class="btn btn-sm btn-bitbucket add-template" value="{{ placeholder }}"
+                                        style="font-size: 100%; font-weight: normal; padding: unset; margin-bottom: 10px;">
                                     &nbsp;{{ placeholder }}&nbsp;
-                                </span>&nbsp; &nbsp;
+                                </button>&nbsp; &nbsp;
                             {% endfor %}
                         </div>
                     </div>
@@ -66,4 +68,14 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block extra_script %}
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+    <script>
+        $('body').on('click', '.add-template', function () {
+            CKEDITOR.instances['id_template'].insertText($(this).val());
+        });
+    </script>
 {% endblock %}

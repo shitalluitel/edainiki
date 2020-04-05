@@ -49,8 +49,8 @@ THIRD_PARTY_APP = [
     'django_adminlte',
     'debug_toolbar',
     'widget_tweaks',
-    # 'ckeditor',
-    'django_summernote',
+    'ckeditor',
+    # 'django_summernote',
     'django_extensions'
 ]
 
@@ -159,90 +159,94 @@ INTERNAL_IPS = [
     'localhost'
 ]
 
-# CKEDITOR_JQUERY_URL = os.path.join(STATIC_URL, 'bower_components/jquery/dist/jquery.min.js')
-# CKEDITOR_UPLOAD_PATH = "uploads/"
-#
-# CKEDITOR_CONFIGS = {
-#     'default': {
-#         'skin': 'bootstrapck',
-#         'toolbar_CustomToolbarConfig': [
-#             {
-#                 'name': 'document',
-#                 'items': [
-#                     '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates', 'Cut', 'Copy', 'Paste',
-#                     'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'
-#                 ]
-#             },
-#             {
-#                 'name': 'editing',
-#                 'items': ['Find', 'Replace', '-']
-#             },
-#             {
-#                 'name': 'basicstyles',
-#                 'items': ['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript']
-#             },
-#             {
-#                 'name': 'paragraph',
-#                 'items': [
-#                     'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-',
-#                     'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter',
-#                     'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl',
-#                     'Language'
-#                 ]
-#             },
-#             {
-#                 'name': 'links',
-#                 'items': ['Link', 'Unlink', 'Anchor']
-#             },
-#             {
-#                 'name': 'insert',
-#                 'items': ['Image', 'Table', 'HorizontalRule', 'SpecialChar', 'PageBreak']
-#             },
-#             '/',
-#             {
-#                 'name': 'styles',
-#                 'items': ['Styles', 'Format', 'Font', 'FontSize']
-#             },
-#             {
-#                 'name': 'colors',
-#                 'items': ['TextColor']
-#             },
-#             {
-#                 'name': 'tools',
-#                 'items': ['Maximize']
-#             },
-#         ],
-#         'toolbar': 'CustomToolbarConfig',  # put selected toolbar config here
-#         'indent': False,
-#         'width': '100%',
-#     }
-# }
-#
-# CKEDITOR_IMAGE_BACKEND = "pillow"
-# CKEDITOR_UPLOAD_SLUGIFY_FILENAME = False
-# CKEDITOR_BROWSE_SHOW_DIRS = True
-#
+CKEDITOR_JQUERY_URL = os.path.join(STATIC_URL, 'bower_components/jquery/dist/jquery.min.js')
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
-X_FRAME_OPTIONS = 'SAMEORIGIN'
-
-SUMMERNOTE_THEME = 'bs3'
-
-SUMMERNOTE_CONFIG = {
-    # You can put custom Summernote settings
-    'summernote': {
-        # As an example, using Summernote Air-mode
-        'airMode': False,
-
-        # Change editor size
+CKEDITOR_CONFIGS = {
+    'default': {
+        'skin': 'bootstrapck',
+        'toolbar_CustomToolbarConfig': [
+            {
+                'name': 'document',
+                'items': [
+                    '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates', 'Cut', 'Copy', 'Paste',
+                    'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'
+                ]
+            },
+            {
+                'name': 'editing',
+                'items': ['Find', 'Replace', '-']
+            },
+            {
+                'name': 'basicstyles',
+                'items': ['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript']
+            },
+            {
+                'name': 'paragraph',
+                'items': [
+                    'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-',
+                    'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter',
+                    'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl',
+                    'Language'
+                ]
+            },
+            {
+                'name': 'links',
+                'items': ['Link', 'Unlink', 'Anchor']
+            },
+            {
+                'name': 'insert',
+                'items': ['Image', 'Table', 'HorizontalRule', 'SpecialChar', 'PageBreak']
+            },
+            '/',
+            {
+                'name': 'styles',
+                'items': ['Styles', 'Format', 'Font', 'FontSize']
+            },
+            {
+                'name': 'colors',
+                'items': ['TextColor']
+            },
+            {
+                'name': 'tools',
+                'items': ['Maximize']
+            },
+{
+                'name': 'source',
+                'items': ['Source']
+            },
+        ],
+        'toolbar': 'CustomToolbarConfig',  # put selected toolbar config here
+        'indent': False,
         'width': '100%',
-        'height': '480',
-
-        'codemirror': {
-            'mode': 'htmlmixed',
-            'lineNumbers': 'true',
-            'theme': 'monokai',
-        },
-    },
+    }
 }
+
+CKEDITOR_IMAGE_BACKEND = "pillow"
+CKEDITOR_UPLOAD_SLUGIFY_FILENAME = False
+CKEDITOR_BROWSE_SHOW_DIRS = True
+
+
+# X_FRAME_OPTIONS = 'SAMEORIGIN'
+#
+# SUMMERNOTE_THEME = 'bs3'
+#
+# SUMMERNOTE_CONFIG = {
+#     # You can put custom Summernote settings
+#     'summernote': {
+#         # As an example, using Summernote Air-mode
+#         'airMode': False,
+#
+#         # Change editor size
+#         'width': '100%',
+#         'height': '480',
+#
+#         'codemirror': {
+#             'mode': 'htmlmixed',
+#             'lineNumbers': 'true',
+#             'theme': 'monokai',
+#         },
+#     },
+# }
 
 SHELL_PLUS = 'ipython'

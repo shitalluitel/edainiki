@@ -1,5 +1,6 @@
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from django import forms
-from django_summernote.widgets import SummernoteWidget
+# from django_summernote.widgets import SummernoteWidget
 
 from apps.setting.models import Setting, LetterTemplate
 
@@ -20,7 +21,8 @@ class SettingUpdateForm(forms.ModelForm):
 
 
 class LetterTemplateForm(forms.ModelForm):
-    template = forms.CharField(widget=SummernoteWidget())
+    # template = forms.CharField(widget=SummernoteWidget())
+    template = forms.CharField(widget=CKEditorUploadingWidget())
 
     class Meta:
         model = LetterTemplate

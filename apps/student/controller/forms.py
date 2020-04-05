@@ -1,9 +1,13 @@
-from ckeditor.widgets import CKEditorWidget
-from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from django import forms
-from django_summernote.widgets import SummernoteWidget
+# from django_summernote.widgets import SummernoteWidget
 
-from apps.student.models import Student, StudentLetter
+from apps.student.models import Student
+from django import forms
+
+from apps.student.models import Student
+
+
+# from django_summernote.widgets import SummernoteWidget
 
 
 # Create your form here.

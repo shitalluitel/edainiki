@@ -11,7 +11,8 @@ urlpatterns = [
                   path('student/', include('apps.student.controller.urls', namespace='students')),
                   path('charkilla/', include('apps.charkilla.controller.urls', namespace='charkillas')),
                   path('', HomePageView.as_view(), name="home"),
-                  path('summernote/', include('django_summernote.urls')),
+                  # path('summernote/', include('django_summernote.urls')),
+                  path('ckeditor/', include('ckeditor_uploader.urls')),
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

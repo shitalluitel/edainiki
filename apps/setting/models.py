@@ -1,3 +1,4 @@
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
@@ -12,7 +13,8 @@ class Setting(models.Model):
 
 class LetterTemplate(models.Model):
     model = models.CharField(max_length=120, choices=TEMPLATE_FOR, default=CHARKILLA)
-    template = models.TextField(max_length=10000)
+    # template = models.TextField(max_length=10000)
+    template = RichTextUploadingField()
     type = models.CharField(max_length=8, choices=TEMPLATE_TYPE, null=True)
 
     def __str__(self):
