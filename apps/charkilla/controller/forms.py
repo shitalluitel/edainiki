@@ -11,13 +11,13 @@ class CharkillaCreateForm(forms.ModelForm):
     class Meta:
         model = Charkilla
         fields = "applicant_name", "eng_date", "nep_date"
-    #
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     for field in self.fields.values():
-    #         field.widget.attrs.update({
-    #             'class': 'form-control',
-    #         })
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.update({
+                'class': 'borderless-input',
+            })
 
 
 class CharkillaUpdateForm(forms.ModelForm):
@@ -29,7 +29,7 @@ class CharkillaUpdateForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs.update({
-                'class': 'form-control',
+                'class': 'form-control borderless-input',
             })
 
 
@@ -45,7 +45,7 @@ class CharkillaDetailForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs.update({
-                'class': 'form-control',
+                'class': 'form-control borderless-input',
             })
 
 

@@ -78,12 +78,16 @@ def generate_form(form=None, formset=None):
             pattern = re.compile(r'{{ _ }}'.replace('_', field))
             _field_to_add = '{{ _ }}'.replace('_', f'form.{field}')
             template = pattern.sub(_field_to_add, template)
-        template = generate_formset(template, formset)
+        if formset:
+            template = generate_formset(template, formset)
         return '{% load widget_tweaks %}' + template
     return None
 
 
 def generate_formset(template, formset):
+    if callable(formset):
+        formset = formset()
+
     fields = formset.form.base_fields.keys()
     pattern = get_multiple_pattern(template)
     try:
@@ -98,8 +102,8 @@ def generate_formset(template, formset):
             <tr class="item">
     '''
     remove_btn = '''
-        <td>
-            <button type="button" class="btn btn-danger btn-sm remove-form-row" id="{{ formset_field.prefix }}">
+        <td style="border: 0.1px solid transparent;">
+            <button type="button" class="btn btn-danger btn-sm remove-form-row" id="{{ formset.prefix }}">
                 {% if formset_field.id %}
                    {{ formset_field.id | add_class:"formset-field" }}
                 {% endif %}
@@ -111,8 +115,8 @@ def generate_formset(template, formset):
         </tr>
         {% endfor %}
         <tr>
-            <td style="border-left: none!important; border-right: none !important; border-bottom: none!important;">
-                <button type="button" class="btn btn-sm btn-success add-form-row" id="{{ formset_field.prefix }}">
+            <td style="border:0.1px solid transparent;">
+                <button type="button" class="btn btn-sm btn-success add-form-row" id="{{ formset.prefix }}">
                     <i class="fa fa-plus"></i>
                 </button>
             </td>

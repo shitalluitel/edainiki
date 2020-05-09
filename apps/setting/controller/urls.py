@@ -5,7 +5,7 @@ from apps.setting.controller.views.setting import (
     SettingEditView, SettingDetailView, SettingDeleteView
 )
 from apps.setting.controller.views.template import (
-    LetterTemplateUpdateView,  TemplateRedirectView
+    LetterTemplateUpdateView, TemplateRedirectView
 )
 
 app_name = 'setting'
@@ -16,7 +16,6 @@ urlpatterns = [
     path('update/', SettingEditView.as_view(), name="update"),
     path('detail/', SettingDetailView.as_view(), name="detail"),
     path('delete/', SettingDeleteView.as_view(), name="delete"),
-    path('template/<int:pk>', LetterTemplateUpdateView.as_view(), name="template-update"),
+    path('template/<int:pk>/', LetterTemplateUpdateView.as_view(), name="template-update"),
     path('template/', TemplateRedirectView.as_view(), name="template-create"),
-    # path('letter/detail/<int:pk>/student/<int:student_id>', StudentLetterDetailView.as_view(), name="letter-detail"),
 ]

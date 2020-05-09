@@ -1,7 +1,10 @@
 import re
 
 from django.core.exceptions import ValidationError
+from django.core.validators import URLValidator
 from django.utils.translation import gettext_lazy as _
+
+from apps.common.utils.commons import nep2eng
 
 
 def area_validation(value):
@@ -13,3 +16,17 @@ def area_validation(value):
                 ' मा राख्नुहोस्। प्रतेक इकाई  ० - २० सम्म मात्र लिईनेछ। '
             )
         )
+
+
+def ward_validation(value):
+    if isinstance(value, int):
+        value = str(value)
+
+    value = nep2eng(value)
+    try:
+        val = int(value)
+    except ValueError:
+        raise ValidationError(_('वार्ड नम्बर अंकमा हुनुपर्दछ ।'))
+
+    if val > 39:
+        raise ValidationError(_('वार्ड नम्बर ० - ३९ बीचमा हुनुपर्दछ ।'))

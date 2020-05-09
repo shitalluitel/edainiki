@@ -50,14 +50,12 @@ THIRD_PARTY_APP = [
     'debug_toolbar',
     'widget_tweaks',
     'ckeditor',
-    # 'django_summernote',
     'django_extensions'
 ]
 
 NEW_APPS = [
     'apps.common',
     'apps.setting',
-    'apps.student',
     'apps.charkilla',
 ]
 

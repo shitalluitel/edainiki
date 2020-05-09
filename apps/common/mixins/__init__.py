@@ -23,19 +23,20 @@ class GenerateDetailPageFromTemplate:
         return context
 
 
-class CreateFormsetMixin:
+class DynamicFormsetMixin:
     def get_formset(self):
         formset_class = hasattr(self, 'formset_class')
-        if formset_class:
-            return formset_class
-        return None
+        assert formset_class, 'Must specify formset class.'
+        return getattr(self, 'formset_class')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if self.request.POST:
-            context['formset'] = getattr(self, 'get_formset')(self.request.POST)
+        formset = getattr(self, 'get_formset')()
+        if self.request.method == 'POST':
+            formset = formset(self.request.POST)
         else:
-            context['formset'] = getattr(self, 'get_formset')
+            formset = formset
+        context['formset'] = formset
 
         template = engines['django'].from_string(
             generate_form(
@@ -46,3 +47,14 @@ class CreateFormsetMixin:
         context['form'] = template.render(context, self.request)
         return context
 
+
+class DynamicFormMixin:
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        template = engines['django'].from_string(
+            generate_form(
+                form=context.get('form'),
+            )
+        )
+        context['form'] = template.render(context, self.request)
+        return context

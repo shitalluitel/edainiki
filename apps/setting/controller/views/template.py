@@ -11,7 +11,7 @@ from apps.setting.models import LetterTemplate
 
 
 class LetterTemplateUpdateView(UpdateView):
-    success_url = reverse_lazy('student:list')
+    success_url = reverse_lazy('setting:template-create')
     form_class = LetterTemplateForm
     template_name = 'setting/letter_template/letter.html'
     queryset = LetterTemplate.objects.all()
@@ -39,15 +39,6 @@ class LetterTemplateUpdateView(UpdateView):
     @staticmethod
     def convert_to_dict(data):
         return map(lambda x: '{{ _ }}'.replace('_', x), data)
-
-
-class LetterTemplateDetailView(DetailView):
-    template_name = 'setting/letter_template/letter_detail.html'
-    queryset = LetterTemplate.objects.all()
-
-    def get_context_data(self, **kwargs):
-        letter = LetterTemplate.objects.filter(id=self.kwargs.get('pk')).first()
-        return super().get_context_data(**kwargs)
 
 
 class TemplateRedirectView(FormView):

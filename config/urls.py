@@ -8,7 +8,6 @@ from apps.common.views import HomePageView
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('setting/', include('apps.setting.controller.urls', namespace='settings')),
-                  path('student/', include('apps.student.controller.urls', namespace='students')),
                   path('charkilla/', include('apps.charkilla.controller.urls', namespace='charkillas')),
                   path('', HomePageView.as_view(), name="home"),
                   # path('summernote/', include('django_summernote.urls')),

@@ -8,3 +8,11 @@
 .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
     border: 1px solid #aeaeae;
 }
+
+.borderless-input {
+    height: 25px;
+    border-style: None;
+    background-color: transparent;
+    border-bottom: 1px dotted black;
+    margin: 0 10px 0 0;
+}

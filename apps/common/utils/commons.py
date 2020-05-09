@@ -3,6 +3,9 @@ import re
 from django.conf import settings
 from django.template.defaultfilters import slugify
 
+NEPALI_DIGIT = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९']
+ENGLISH_DIGIT = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+
 
 def unique_slugify(instance, value, slug_field_name='slug', queryset=None, slug_separator='-'):
     slug_field = instance._meta.get_field(slug_field_name)
@@ -82,3 +85,15 @@ def extract_fields(related_model, is_related=False):
         )
     )
     return fields, meta_data
+
+
+def nep2eng(digit: str):
+    """
+    convert nepali number to english number
+    :param digit: input nepali number
+    :type digit: str
+    :return: str
+    """
+    for key, value in zip(NEPALI_DIGIT, ENGLISH_DIGIT):
+        digit = digit.replace(key, value)
+    return digit

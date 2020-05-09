@@ -1,22 +1,20 @@
 from django.contrib import messages
-from django.http import HttpResponse
 from django.shortcuts import redirect
-from django.template import engines
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
 
 from apps.charkilla.controller.forms import (
     CharkillaCreateForm, CharkillaUpdateForm, CharkillaDetailFormSet)
 from apps.charkilla.models import Charkilla
-from apps.common.mixins import GenerateDetailPageFromTemplate
-from apps.common.utils.template_util import generate_form
+from apps.common.mixins import GenerateDetailPageFromTemplate, DynamicFormsetMixin
 
 
-class CharkillaCreateView(CreateView):
+class CharkillaCreateView(DynamicFormsetMixin, CreateView):
     queryset = Charkilla.objects.all()
     form_class = CharkillaCreateForm
     template_name = 'charkilla/create.html'
     success_url = reverse_lazy('charkilla:list')
+    formset_class = CharkillaDetailFormSet
 
     def form_valid(self, form):
         context = self.get_context_data()
