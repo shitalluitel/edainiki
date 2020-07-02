@@ -1,13 +1,15 @@
-
-.table-bordered {
-    border: 1px solid #aeaeae;
+.table > thead > tr > th, .table > tbody > tr > th,
+.table > tfoot > tr > th, .table > thead > tr > td,
+.table > tbody > tr > td, .table > tfoot > tr > td {
+    border: 1px solid black;
 }
 
-.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th,
-.table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td,
-.table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
-    border: 1px solid #aeaeae;
+.table-borderless > thead > tr > th, .table-borderless > tbody > tr > th,
+.table-borderless > tfoot > tr > th, .table-borderless > thead > tr > td,
+.table-borderless > tbody > tr > td, .table-borderless > tfoot > tr > td {
+    border: 0.1px solid transparent;
 }
+
 
 .borderless-input {
     height: 25px;
@@ -15,4 +17,8 @@
     background-color: transparent;
     border-bottom: 1px dotted black;
     margin: 0 10px 0 0;
+}
+
+.jumbotron{
+    background-color: transparent;
 }

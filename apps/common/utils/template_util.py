@@ -130,3 +130,18 @@ def generate_formset(template, formset):
     formset_form = start_formset + _multiple_data + remove_btn + end_formset
     template = pattern.sub(formset_form, template)
     return template + '{{ formset.management_form }}'
+
+
+def get_template_field_map(model_name, related=False):
+    letter_template = LetterTemplate.objects.get(
+        model=model_name,
+        type=NIBEDAN
+    )
+    patt_match = re.compile(r'\{\{ ([\w_ ]+) \}\}').findall(clean_template(letter_template.template))
+    field_map = getattr(field_reference, model_name.upper())
+    return list(set(
+        field_map.get(
+            'non_related_fields' if not related else 'related_fields',
+            []
+        )
+    ).intersection(set(patt_match)))

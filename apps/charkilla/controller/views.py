@@ -12,7 +12,7 @@ from apps.common.mixins import GenerateDetailPageFromTemplate, DynamicFormsetMix
 class CharkillaCreateView(DynamicFormsetMixin, CreateView):
     queryset = Charkilla.objects.all()
     form_class = CharkillaCreateForm
-    template_name = 'charkilla/create.html'
+    template_name = 'common/create.html'
     success_url = reverse_lazy('charkilla:list')
     formset_class = CharkillaDetailFormSet
 
@@ -29,6 +29,8 @@ class CharkillaCreateView(DynamicFormsetMixin, CreateView):
 
             return redirect('student:list')
         else:
+            import ipdb
+            ipdb.set_trace()
             messages.error(
                 self.request,
                 f'रेकर्ड सम्पादन गर्न सकिएन।'
@@ -63,11 +65,6 @@ class CharkillaDeleteView(DeleteView):
     success_url = reverse_lazy('charkilla:list')
 
 
-class CharkillaTemplateView(DetailView, GenerateDetailPageFromTemplate):
+class CharkillaTemplateView(GenerateDetailPageFromTemplate, DetailView):
     template_name = 'common/template.html'
     queryset = Charkilla.objects.all()
-
-    # from django.template import engines
-    #
-    # django_engine = engines['django']
-    # template = django_engine.from_string("Hello {{ name }}!")

@@ -6,19 +6,23 @@
     <!--Add Some thing here. -->
 {% endblock %}
 
-{% block page_description %}
-    Create
-{% endblock %}
+{% block content_header %}
 
-{% block breadcrumbLink %}
-    <li>
-        <a href="#" class="breadcrumb-item"><!--Add Some thing here. --></a>
-    </li>
-    <li>
-        <a href="#" class="breadcrumb-item active"><!--Add Some thing here. --></a>
-    </li>
 {% endblock %}
-
+{##}
+{#{% block page_description %}#}
+{#    Create#}
+{#{% endblock %}#}
+{##}
+{#{% block breadcrumbLink %}#}
+{#    <li>#}
+{#        <a href="#" class="breadcrumb-item"><!--Add Some thing here. --></a>#}
+{#    </li>#}
+{#    <li>#}
+{#        <a href="#" class="breadcrumb-item active"><!--Add Some thing here. --></a>#}
+{#    </li>#}
+{#{% endblock %}#}
+{##}
 
 {% block content %}
     <div class="row">
@@ -27,8 +31,20 @@
                 <div class="panel-body">
                     <form method="post" {% if enctype %} enctype="{{ enctype }}" {% endif %}>
                         {% csrf_token %}
-                        {{ form }}
-                        <input type="submit" class="btn btn-primary" value="Submit">
+                        {% if form %}
+                            {{ form }}
+                            <input type="submit" class="btn btn-primary" value="Submit">
+                        {% else %}
+                            <div class="jumbotron">
+                                <h2>Template Not Found!!!</h2>
+                                <p>You can add template for this section clicking below.</p>
+                                <p>
+                                    <a class="btn btn-primary btn-sm"
+                                       href="{% url 'setting:template-create' %}"
+                                       role="button">Click Here</a>
+                                </p>
+                            </div>
+                        {% endif %}
                     </form>
                 </div>
             </div>

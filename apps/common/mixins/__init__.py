@@ -1,6 +1,7 @@
 from django.template import engines
 
 from apps.common.utils.template_util import generate_letter, generate_form
+from apps.setting.constants import NIBEDAN
 from apps.setting.models import LetterTemplate
 
 
@@ -9,9 +10,10 @@ class GenerateDetailPageFromTemplate:
         context = super().get_context_data(**kwargs)
         obj = self.object
         if obj:
-            temp_obj = LetterTemplate.objects.filter(
-                model=obj.__class__.__name__
-            ).first()
+            temp_obj = LetterTemplate.objects.get(
+                model=obj.__class__.__name__,
+                type=NIBEDAN
+            )
             if temp_obj:
                 template = generate_letter(
                     instance=obj,
@@ -37,14 +39,16 @@ class DynamicFormsetMixin:
         else:
             formset = formset
         context['formset'] = formset
-
-        template = engines['django'].from_string(
-            generate_form(
-                form=context.get('form'),
-                formset=context.get('formset')
-            )
+        template = generate_form(
+            form=context.get('form'),
+            formset=context.get('formset')
         )
-        context['form'] = template.render(context, self.request)
+        form = None
+        if template:
+            template = engines['django'].from_string(template)
+            form = template.render(context, self.request)
+
+        context['form'] = form
         return context
 
 

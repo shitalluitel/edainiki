@@ -37,6 +37,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 SYS_APPS = [
+    # 'django_adminlte_theme',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -167,8 +168,8 @@ CKEDITOR_CONFIGS = {
             {
                 'name': 'document',
                 'items': [
-                    '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates', 'Cut', 'Copy', 'Paste',
-                    'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'
+                    '-', 'Preview', '-', 'Templates', 'Cut', 'Copy', 'Paste',
+                    '-', 'Undo', 'Redo'
                 ]
             },
             {
@@ -184,8 +185,7 @@ CKEDITOR_CONFIGS = {
                 'items': [
                     'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-',
                     'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter',
-                    'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl',
-                    'Language'
+                    'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl'
                 ]
             },
             {
@@ -248,3 +248,7 @@ CKEDITOR_BROWSE_SHOW_DIRS = True
 # }
 
 SHELL_PLUS = 'ipython'
+SHELL_PLUS_PRE_IMPORTS = [
+    ('django.db.models', '*'),
+    ('django.db.models.functions', '*')
+]

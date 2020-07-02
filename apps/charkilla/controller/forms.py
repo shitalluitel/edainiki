@@ -2,9 +2,7 @@ from django import forms
 from django.forms import formset_factory
 
 from apps.charkilla.models import Charkilla, CharkillaDetail
-
-
-# Create your form here.
+from apps.common.utils.template_util import get_template_field_map
 
 
 class CharkillaCreateForm(forms.ModelForm):
@@ -13,6 +11,7 @@ class CharkillaCreateForm(forms.ModelForm):
         fields = "applicant_name", "eng_date", "nep_date"
 
     def __init__(self, *args, **kwargs):
+        self.Meta.fields = get_template_field_map('Charkilla')
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs.update({
@@ -42,6 +41,7 @@ class CharkillaDetailForm(forms.ModelForm):
         ]
 
     def __init__(self, *args, **kwargs):
+        self.Meta.fields = get_template_field_map('Charkilla', related=True)
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs.update({
